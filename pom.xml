@@ -5,7 +5,7 @@
   <groupId>com.diginamic</groupId>
   <artifactId>premier-maven</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <!-- <packaging>jar</packaging>  -->
 
   <name>premier-maven</name>
   <url>http://maven.apache.org</url>
@@ -14,13 +14,40 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>3.8.1</junit.version>
   </properties>
-  
-  <build>
-	<finalName>${project.artifactId}</finalName>
-  </build>
 
-  <dependencies>
-  
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.diginamic.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
     <dependency>
 		<groupId>junit</groupId>
 		<artifactId>junit</artifactId>
@@ -33,6 +60,5 @@
     	<artifactId>jfiglet</artifactId>
     	<version>0.0.3</version>
 	</dependency>
-    
   </dependencies>
 </project>
