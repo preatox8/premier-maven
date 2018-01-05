@@ -13,10 +13,20 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>3.8.1</junit.version>
+    <mode>DEV</mode>
   </properties>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
+
+		<!-- Activation du remplacement des variables via Maven -->
+		<resources>
+			<resource>
+				<directory>src/main/ressources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
 		<plugins>
 		
 			<plugin>
@@ -64,4 +74,29 @@
 	    	<scope>compile</scope>
 	    </dependency>	
   </dependencies>
+  
+  <profiles>
+  
+	<profile>
+		<id>dev</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<properties>
+			<mode>DEV</mode>
+		</properties>
+	</profile>
+	
+	<profile>
+		<id>prod</id>
+		<properties>
+			<mode>PROD</mode>
+		</properties>
+	</profile>
+	
+</profiles>
+  
+  
+  
+  
 </project>
